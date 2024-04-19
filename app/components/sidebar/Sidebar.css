@@ -1,0 +1,72 @@
+/* components/Sidebar.css */
+.sidebar {
+  height: 100vh;
+  min-width: 260px;
+  border-right: 1px solid rgba(253, 253, 253, 0.075);
+  color: #fff;
+  padding: 85px 8px;
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.logo-img {
+  margin: 0px 15px 0px 0px !important;
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.links {
+  margin: 30px 0px 0px 0px;
+}
+
+.links ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.links li {
+  padding: 17px 25px;
+  cursor: pointer;
+  display: flex;
+  font-size: 0.9rem;
+}
+/* .nav-icon-inactive {
+  opacity: 50%;
+} */
+
+.links li a {
+  align-self: center;
+  padding-left: 20px;
+}
+.active {
+  background-color: #37373F;
+  border-radius: 20px;
+  color: #fff;
+}
+.inactive {
+  color: #ffffff71;
+}
+
+.logout {
+  width: 100%;
+  padding: 10px;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout:hover {
+  background-color: #c0392b;
+}
