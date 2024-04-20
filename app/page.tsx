@@ -5,9 +5,30 @@ import SmallCardPortfolio from "./components/cards/SmallCardPortfolio";
 import SmallCardProfit from "./components/cards/SmallCardProfit";
 import SmallCardOpenPositions from "./components/cards/SmallCardOpenPositions";
 import config from "@/tailwind.config";
+import { useEffect, useLayoutEffect } from 'react';
+import {Service, Auth} from '@/services/service'
+import { redirect } from 'next/navigation';
+import useRequireAuth from "@/services/useRequireAuth";
+
+
 
 export default function Home() {
   const colors = config.theme?.extend?.colors;
+
+  useEffect(() => {
+    Auth.initUser()
+  })
+
+  useLayoutEffect(() => {
+    const isAuth = Auth.state.authenticate;
+    if(!isAuth){
+      redirect("/login")
+    }
+  }, [])
+
+
+  useRequireAuth();
+
   return (
     <main className="flex w-full justify-between p-11">
       <div className="wrapper flex flex-col">

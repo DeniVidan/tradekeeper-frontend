@@ -1,12 +1,34 @@
 "use client";
-import React from 'react';
+import React, {useState} from 'react';
 import Image from "next/image";
 import './Sidebar.css'
 import { useRouter, usePathname  } from 'next/navigation';
+import { Service, Auth } from "@/services/service";
+
 
 const Sidebar = () => {
   const router = useRouter();
-  const pathname = usePathname()
+  const pathname = usePathname();
+
+
+  const handleLogout = async () => {
+    try {
+      let response =  Auth.logout();
+      router.push('/login')
+
+      
+/*       if (response.success == true) {
+        console.log(response.success == true)
+        router.replace('/');
+      } */
+      console.log("res: ", response);
+    } catch (error) {
+      console.log("err: ", error);
+    }
+  };
+
+
+
   return (
     <aside className="sidebar">
       <div style={{display: "flex", flexDirection: "column"}}>
@@ -75,7 +97,7 @@ const Sidebar = () => {
         </nav>
       </div>
 
-      <a className='cursor-pointer' style={{display:"flex", padding: "20px 25px"}}>
+      <a onClick={handleLogout} className='cursor-pointer' style={{display:"flex", padding: "20px 25px"}}>
         <Image
           style={{}}
           src="/logout-icon.svg"
