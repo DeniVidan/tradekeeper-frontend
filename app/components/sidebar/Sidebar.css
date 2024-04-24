@@ -6,8 +6,8 @@
   color: #fff;
   padding: 85px 8px;
   display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .logo-container {

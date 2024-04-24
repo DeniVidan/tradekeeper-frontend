@@ -8,7 +8,7 @@ const useRequireAuth = () => {
   useEffect(() => {
     const userObj = JSON.parse(localStorage.getItem('user'));
     const token = userObj?.token;
-    console.log("daj mi token: ", token, pathname)
+    //console.log("daj mi token: ", token, pathname)
 
     // If the user has a token in localStorage, redirect them away from /login and /register routes
     if (token && (pathname === '/login' || pathname === '/register')) {

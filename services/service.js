@@ -1,4 +1,7 @@
 import axios from "axios";
+import { useContext } from 'react';
+import getUserData from "./getUserData";
+
 
 
 const Service = axios.create({
@@ -26,16 +29,14 @@ Service.interceptors.request.use((request) => {
 
 Service.interceptors.response.use(
   (response) => {
-    //console.log("response: ", response);
-    if (response.data && response.data.user) {
-      // Use the UserContext to store the user data
-      const { storeUser } = useContext(UserContext);
-      storeUser(response.data.user);
-    }
+    console.log("interceptor response: ", response.data.user);
+    /* if (response.data && response.data.user) {} */
+
+
     return response;
   },
   (error) => {
-    console.log("sad: ", error);
+    console.log("err interceptor response: ", error);
     if (error?.response?.status == 401 || error?.response?.status == 403) {
       console.log("error token: ", error);
       Auth.logout();
@@ -50,13 +51,11 @@ let Auth = {
         email: email,
         password: password,
       });
-      console.log("a: ", response.data);
+      console.log("login response data: ", response.data.user);
       if (response.data.success === true) {
         localStorage.setItem(
           "user",
-          JSON.stringify({ token: response.data.token })
-
-          
+          JSON.stringify(response.data.user)
         );
 
         //document.cookie = JSON.stringify({"token": response.data.token})
@@ -78,7 +77,7 @@ let Auth = {
         email: email,
         password: password,
       });
-      console.log("a: ", response.data);
+      console.log("register response data: ", response.data);
       if (response.data.success === true) {
         localStorage.setItem(
           "user",
@@ -99,20 +98,6 @@ let Auth = {
     localStorage.removeItem("user");
   },
 
-  async initUser() {
-    try {
-      let response = await Service.get("/api/init_user_data", {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user"))?.token
-          }`,
-        },
-      });
-      console.log("user: ", response.data.user);
-    } catch (error) {
-      console.log("err2: ", error);
-    }
-  },
 
   getUser() {
     if (JSON.parse(localStorage.getItem("user"))) {
@@ -121,7 +106,7 @@ let Auth = {
   },
 
   authenticated() {
-    let user = Auth.getUser();
+    let user = getUserData();
     if (user) {
       return true;
     }

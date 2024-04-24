@@ -9,20 +9,20 @@ import { useEffect, useLayoutEffect } from 'react';
 import {Service, Auth} from '@/services/service'
 import { redirect } from 'next/navigation';
 import useRequireAuth from "@/services/useRequireAuth";
+import { useRouter } from "next/navigation";
 
 
 
 export default function Home() {
   const colors = config.theme?.extend?.colors;
+  const router = useRouter()
 
-  useEffect(() => {
-    Auth.initUser()
-  })
 
   useLayoutEffect(() => {
     const isAuth = Auth.state.authenticate;
     if(!isAuth){
-      redirect("/login")
+      router.push("login")
+      router.refresh()
     }
   }, [])
 

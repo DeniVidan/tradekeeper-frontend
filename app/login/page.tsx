@@ -19,7 +19,8 @@ const LoginPage = () => {
       
       if (response.success == true) {
         console.log(response.success == true)
-        router.replace('/');
+        router.push("/");
+        router.refresh();
       }
       console.log("res: ", response);
     } catch (error) {
