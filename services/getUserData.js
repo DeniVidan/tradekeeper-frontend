@@ -1,8 +1,8 @@
-const getUserData = () => {
+const getUserData = async () => {
     try {
       // Retrieve user data from local storage
-      const userData = JSON.parse(localStorage.getItem('user'));
-  
+      const userData = await JSON.parse(localStorage.getItem('user'));
+      //console.log("ovo: ", userData)
       // Return user data object
       return userData;
     } catch (error) {

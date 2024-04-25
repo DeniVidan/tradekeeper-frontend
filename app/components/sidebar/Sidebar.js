@@ -27,6 +27,9 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
+      <div className="fixed flex flex-col justify-between h-4/5">
+
+    
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div className="logo-container">
           <Image
@@ -151,6 +154,7 @@ const Sidebar = () => {
         />
         <span style={{ paddingLeft: "20px" }}> Log out </span>
       </a>
+      </div>
     </div>
   );
 };

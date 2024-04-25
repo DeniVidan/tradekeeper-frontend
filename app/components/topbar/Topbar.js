@@ -4,10 +4,10 @@ import { useContext } from "react";
 import getUserData from "@/services/getUserData";
 import { useRouter, usePathname } from "next/navigation";
 
-export default function Home() {
-  const user = getUserData();
+export default function Topbar() {
   const router = useRouter();
   const pathname = usePathname();
+  let user = JSON.parse(localStorage.getItem("user"))
 
   //console.log("user data: ", user);
 
@@ -15,7 +15,7 @@ export default function Home() {
     <div className="w-full">
       <div className="navbar justify-end">
         <div className="flex flex-row justify-end gap-1">
-          {user ? (
+          {user.token ? (
             <div className="flex flex-row justify-end gap-1 ">
               <div className="light-dark-mode flex justify-center border border-weak_white rounded-xl h-10 w-10 cursor-pointer">
                 {" "}
@@ -52,8 +52,8 @@ export default function Home() {
                   />
                 </div>
                 <div className="account-info flex flex-col px-2 justify-center">
-                  <span className="text-sm">{user.username}</span>
-                  <span className="text-light_white text-xs">{user.email}</span>
+                  <span className="text-sm">{JSON.parse(localStorage.getItem("user")).username}</span>
+                  <span className="text-light_white text-xs">{JSON.parse(localStorage.getItem("user")).email}</span>
                 </div>
               </div>
             </div>
