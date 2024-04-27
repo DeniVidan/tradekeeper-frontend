@@ -3,22 +3,19 @@ import React, { useState } from "react";
 import { Service, Auth } from "@/services/service";
 /* import withAuthRedirect from '@/services/authRedirect'; */
 import useRequireAuth from "@/services/useRequireAuth";
-import { useRouter } from 'next/navigation';
-
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-
-
   const handleLogin = async () => {
     try {
       let response = await Auth.login(email, password);
-      
+
       if (response.success == true) {
-        console.log(response.success == true)
+        console.log(response.success == true);
         router.push("/");
         router.refresh();
       }
@@ -31,7 +28,7 @@ const LoginPage = () => {
   useRequireAuth();
 
   return (
-    <div className="flex justify-center w-full mt-72">
+    <div className="flex justify-center w-full mt-52">
       <div className="form-wrapper flex flex-col w-72 gap-7">
         <div className="text-center">LOGIN</div>
         <input

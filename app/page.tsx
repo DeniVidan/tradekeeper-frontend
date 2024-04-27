@@ -30,7 +30,7 @@ export default function Home() {
   useRequireAuth();
 
   return (
-    <main className="flex w-full justify-between p-11">
+    <main className="flex w-full justify-between p-11 mt-5">
       <div className="wrapper flex flex-col">
         <div className="title text-3xl font-bold">
           <h1> Overview </h1>

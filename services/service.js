@@ -1,8 +1,6 @@
 import axios from "axios";
-import { useContext } from 'react';
+import { useContext } from "react";
 import getUserData from "./getUserData";
-
-
 
 const Service = axios.create({
   baseURL: "http://localhost:3001",
@@ -12,8 +10,6 @@ const ServiceAuth = axios.create({
   baseURL: "http://localhost:3001",
   timeout: 10000,
 });
-
-
 
 Service.interceptors.request.use((request) => {
   const { token } = JSON.parse(localStorage.getItem("user"));
@@ -31,7 +27,6 @@ Service.interceptors.response.use(
   (response) => {
     console.log("interceptor response: ", response.data.user);
     /* if (response.data && response.data.user) {} */
-
 
     return response;
   },
@@ -51,12 +46,9 @@ let Auth = {
         email: email,
         password: password,
       });
-      console.log("login response data: ", response.data.user);
+      //console.log("login response data: ", response.data.user);
       if (response.data.success === true) {
-        localStorage.setItem(
-          "user",
-          JSON.stringify(response.data.user)
-        );
+        localStorage.setItem("user", JSON.stringify(response.data.user));
 
         //document.cookie = JSON.stringify({"token": response.data.token})
         //console.log(localStorage.getItem("user"))
@@ -71,19 +63,22 @@ let Auth = {
       };
     }
   },
-  async register(email, password) {
+  async register(firstname, lastname, email, username, password) {
     try {
       let response = await ServiceAuth.post("/api/register", {
+        firstname: firstname,
+        lastname: lastname,
         email: email,
+        username: username,
         password: password,
       });
-      console.log("register response data: ", response.data);
+      //console.log("register response data: ", response.data.success);
       if (response.data.success === true) {
         localStorage.setItem(
           "user",
-          JSON.stringify({ token: response.data.token })
+           JSON.stringify(response.data.user)
         );
-        console.log(localStorage.getItem("user"));
+        
         return response.data;
       }
     } catch (error) {
@@ -98,7 +93,6 @@ let Auth = {
     localStorage.removeItem("user");
   },
 
-
   getUser() {
     if (JSON.parse(localStorage.getItem("user"))) {
       return true;
@@ -106,11 +100,11 @@ let Auth = {
   },
 
   authenticated() {
-    let user = getUserData();
-    if (user) {
+    if (JSON.parse(localStorage.getItem("user")) !== null) {
+      let user = JSON.parse(localStorage.getItem("user"));
+      //console.log("authenticated user: ", user);
       return true;
-    }
-    return false;
+    } else return false;
   },
 
   state: {

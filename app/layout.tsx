@@ -17,8 +17,7 @@ export default function RootLayout({
   const router = useRouter();
   const pathname = usePathname();
 
-
-  useEffect(() => {  
+  useEffect(() => {
     const isAuth = Auth.state.authenticate; // Move isAuth outside of useLayoutEffect
     if (!isAuth && pathname !== "/register") {
       router.push("login");
@@ -26,29 +25,26 @@ export default function RootLayout({
     }
   }, []);
 
-  function pokazi() {
+  function isAuth() {
     const isAuth = Auth.state.authenticate;
-    console.log(isAuth)
-    return isAuth
+    //console.log("pokazi: ", isAuth);
+    return isAuth;
   }
 
   return (
     <html lang="en">
       <body className={inter.className}>
         <div className="wrapper">
-          {pokazi() /* && 
-            (
-              
-                
-              
-            ) */
-          }
-<Sidebar />
-          <div className="flex flex-col w-full pt-5 pr-7">
-            <div>
+          <div className="z-10">
+            {isAuth() && <Sidebar />}
+          </div>
+          
+
+          <div className="flex flex-col w-full">
+            <div className="z-0">
               <Topbar />
             </div>
-            <div>{children}</div>
+            <div className="sm:ml-64">{children}</div>
           </div>
         </div>
       </body>
