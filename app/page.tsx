@@ -10,7 +10,8 @@ import {Service, Auth} from '@/services/service'
 import { redirect } from 'next/navigation';
 import useRequireAuth from "@/services/useRequireAuth";
 import { useRouter } from "next/navigation";
-
+import axios from 'axios';
+import {getExecutionList} from '../api/bybitAPI';
 
 
 export default function Home() {
@@ -19,6 +20,24 @@ export default function Home() {
 
 
   useLayoutEffect(() => {
+    const fetchData = async () => {
+      //const symbol = ['BTCUSDT', 'ETHUSDT', 'SOLUSDT'];
+      //const interval = '1m';
+      const startTime = 1699628659; // Unix timestamp for the start time
+      const endTime = 1714489459; // Unix timestamp for the end time
+
+      getExecutionList()
+      .then((response) => {
+          console.log('Execution list:', response);
+          // Process the response data as needed
+      })
+      .catch((error) => {
+          console.error('Error:', error);
+      });
+    };
+
+    fetchData();
+
     const isAuth = Auth.state.authenticate;
     if(!isAuth){
       router.push("login")

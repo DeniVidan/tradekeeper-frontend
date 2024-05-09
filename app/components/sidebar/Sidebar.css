@@ -70,3 +70,8 @@
 .logout:hover {
   background-color: #c0392b;
 }
+
+.dropdown-item {
+  padding-left: 10px;
+  padding-right: 25px;
+}
