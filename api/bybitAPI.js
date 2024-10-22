@@ -4,8 +4,8 @@ const { RestClientV5 } = require('bybit-api');
 async function getExecutionList() {
     const client = new RestClientV5({
         testnet: true,
-        key: '1L1ELXPqtd3bSCYgjA',
-        secret: 'MQmAr3jmtQYrsgn9bnU8dPeQpapJwpSstA9C',
+        key: '',
+        secret: '',
     });
 
     try {
